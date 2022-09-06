@@ -2,8 +2,8 @@
   <div id="app">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader></MyHeader>
-        <MyList></MyList>
+        <MyHeader :getTodo="getTodo"></MyHeader>
+        <MyList :todoList="todoList"></MyList>
         <MyFooter></MyFooter>
       </div>
     </div>
@@ -21,6 +21,21 @@ export default {
     MyHeader,
     MyList,
     MyFooter,
+  },
+  data() {
+    return {
+      todoList: [
+        { id: "1001", title: "抽烟", done: false },
+        { id: "1002", title: "喝酒", done: false },
+        { id: "1003", title: "烫头", done: true },
+        { id: "1004", title: "写代码", done: true },
+      ]
+    };
+  },
+  methods: {
+    getTodo(e) {
+      this.todoList.unshift(e);
+    },
   },
 };
 </script>
