@@ -16,8 +16,8 @@ export default {
   name: "MyHeader",
   data() {
     return {
-      inputTodo: "",
-    };
+      inputTodo: ""
+    }
   },
   props: ["getTodo"],
   methods: {
@@ -28,11 +28,11 @@ export default {
       let newTodo = {
         id: nanoid(),
         title: this.inputTodo,
-        done: false,
+        done: false
       };
       this.getTodo(newTodo);
       this.inputTodo = '';
-    },
+    }
   }
 };
 </script>

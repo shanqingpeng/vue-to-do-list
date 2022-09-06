@@ -1,31 +1,37 @@
 <template>
   <ul class="todo-main">
-    <MyItem v-for="todo in todoList" :key="todo.id" :todoProps="todo"></MyItem>
+    <MyItem
+      v-for="todo in todoList"
+      :key="todo.id"
+      :todoProps="todo"
+      :selectOne="selectOne"
+      :deleteOne="deleteOne"
+    ></MyItem>
   </ul>
 </template>
 
 <script>
 import MyItem from "./MyItem.vue";
 export default {
-    name: "MyList",
-    components: {MyItem},
-    props: ['todoList']
+  name: "MyList",
+  components: { MyItem },
+  props: ["todoList", "selectOne", "deleteOne"]
 };
 </script>
 
 <style scoped>
-    .todo-main {
-        margin-left: 0px;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-        padding: 0px;
-    }
-    .todo-empty {
-        height: 40px;
-        line-height: 40px;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-        padding-left: 5px;
-        margin-top: 10px;
-    }
+.todo-main {
+  margin-left: 0px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 0px;
+}
+.todo-empty {
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding-left: 5px;
+  margin-top: 10px;
+}
 </style>

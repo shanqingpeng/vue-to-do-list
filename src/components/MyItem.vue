@@ -1,20 +1,27 @@
 <template>
   <li>
     <label>
-      <input type="checkbox" :checked="done"/>
-      <span>{{todoProps.title}}</span>
+      <input
+        type="checkbox"
+        :checked="todoProps.done"
+        @click="select(todoProps.id)"
+      />
+      <span>{{ todoProps.title }}</span>
     </label>
-    <button class="btn btn-danger" style="display: none">删除</button>
+    <button class="btn btn-danger" @click="deleteTodo(todoProps.id)">删除</button>
   </li>
 </template>
 
 <script>
 export default {
   name: "MyItem",
-  props: ["todoProps"],
-  data() {
-    return {
-      done: this.todoProps.done
+  props: ["todoProps", "selectOne", "deleteOne"],
+  methods: {
+    select(id) {
+      this.selectOne(id);
+    },
+    deleteTodo(id) {
+      this.deleteOne(id);
     }
   }
 };
@@ -53,5 +60,13 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+
+li:hover {
+  background-color: #ddd;
+}
+
+li:hover button {
+  display: block;
 }
 </style>

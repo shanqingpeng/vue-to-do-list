@@ -3,8 +3,17 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :getTodo="getTodo"></MyHeader>
-        <MyList :todoList="todoList"></MyList>
-        <MyFooter></MyFooter>
+        <MyList
+          :todoList="todoList"
+          :selectOne="selectOne"
+          :deleteOne="deleteOne"
+        ></MyList>
+        <MyFooter
+          :selectAll="selectAll"
+          :completedCount="completedCount"
+          :totalCount="totalCount"
+          :clearDone="clearDone"
+        ></MyFooter>
       </div>
     </div>
   </div>
@@ -28,15 +37,55 @@ export default {
         { id: "1001", title: "抽烟", done: false },
         { id: "1002", title: "喝酒", done: false },
         { id: "1003", title: "烫头", done: true },
-        { id: "1004", title: "写代码", done: true },
-      ]
+        { id: "1004", title: "写代码", done: true }
+      ],
     };
   },
   methods: {
     getTodo(e) {
       this.todoList.unshift(e);
     },
+    selectAll(e) {
+      console.log("this is App's selectAll", e);
+      if (e) {
+        for (var i = 0; i < this.todoList.length; i++) {
+          let newTodo = this.todoList[i];
+          newTodo.done = true;
+          this.todoList.splice(i, 1, newTodo);
+        }
+      } else {
+        for (var i = 0; i < this.todoList.length; i++) {
+          let newTodo = this.todoList[i];
+          newTodo.done = false;
+          this.todoList.splice(i, 1, newTodo);
+        }
+      }
+    },
+    selectOne(id) {
+      this.todoList.forEach((e) => {
+        if (e.id === id) {
+          console.log("this is App's selectOne", id);
+          e.done = !e.done;
+        }
+      });
+    },
+    deleteOne(id) {
+      console.log("this is App's deleteOne", id);
+      this.todoList = this.todoList.filter((e) => e.id !== id);
+    },
+    clearDone() {
+      console.log("this is App's deleteOne");
+      this.todoList = this.todoList.filter((e) => e.done !== true);
+    },
   },
+  computed: {
+    completedCount() {
+      return this.todoList.filter((t) => t.done).length;
+    },
+    totalCount() {
+      return this.todoList.length;
+    }
+  }
 };
 </script>
 
