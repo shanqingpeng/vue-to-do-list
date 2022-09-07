@@ -1,7 +1,8 @@
 <template>
-  <div class="todo-footer">
+  <div class="todo-footer" v-show="totalCount > 0">
     <label>
-      <input type="checkbox" @click="doSelect" />
+      <!-- <input type="checkbox" :checked="checkedAll" @click="doSelect" /> -->
+      <input type="checkbox" v-model="checkedAll" />
     </label>
     <span>
       <span>已完成{{ completedCount }}</span> / 全部{{ totalCount }}
@@ -13,15 +14,30 @@
 <script>
 export default {
   name: "MyFooter",
-  props: ["selectAll", "completedCount", "totalCount", "clearDone"],
+  props: ["todoList", "selectAll", "clearDone"],
   methods: {
-    doSelect(e) {
-      console.log(this);
-      this.selectAll(e.target.checked);
-    },
+    // doSelect(e) {
+    //   this.selectAll(e.target.checked);
+    // },
     doClear() {
-      console.log(this);
       this.clearDone();
+    },
+  },
+  computed: {
+    totalCount() {
+      return this.todoList.length;
+    },
+    completedCount() {
+      return this.todoList.filter((e) => e.done).length;
+    },
+    checkedAll: {
+      get() {
+        return this.completedCount === this.totalCount && this.totalCount > 0;
+      },
+      set(value) {
+        console.log("checkedAll's set", value);
+        this.selectAll(value);
+      },
     },
   },
 };

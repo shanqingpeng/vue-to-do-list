@@ -9,9 +9,8 @@
           :deleteOne="deleteOne"
         ></MyList>
         <MyFooter
+          :todoList="todoList"
           :selectAll="selectAll"
-          :completedCount="completedCount"
-          :totalCount="totalCount"
           :clearDone="clearDone"
         ></MyFooter>
       </div>
@@ -37,7 +36,7 @@ export default {
         { id: "1001", title: "抽烟", done: false },
         { id: "1002", title: "喝酒", done: false },
         { id: "1003", title: "烫头", done: true },
-        { id: "1004", title: "写代码", done: true }
+        { id: "1004", title: "写代码", done: true },
       ],
     };
   },
@@ -45,21 +44,9 @@ export default {
     getTodo(e) {
       this.todoList.unshift(e);
     },
-    selectAll(e) {
-      console.log("this is App's selectAll", e);
-      if (e) {
-        for (var i = 0; i < this.todoList.length; i++) {
-          let newTodo = this.todoList[i];
-          newTodo.done = true;
-          this.todoList.splice(i, 1, newTodo);
-        }
-      } else {
-        for (var i = 0; i < this.todoList.length; i++) {
-          let newTodo = this.todoList[i];
-          newTodo.done = false;
-          this.todoList.splice(i, 1, newTodo);
-        }
-      }
+    selectAll(checked) {
+      console.log("this is App's selectAll", checked);
+      this.todoList.forEach(e => e.done = checked);
     },
     selectOne(id) {
       this.todoList.forEach((e) => {
@@ -84,8 +71,8 @@ export default {
     },
     totalCount() {
       return this.todoList.length;
-    }
-  }
+    },
+  },
 };
 </script>
 
