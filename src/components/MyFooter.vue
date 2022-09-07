@@ -21,7 +21,7 @@ export default {
     // },
     doClear() {
       this.clearDone();
-    },
+    }
   },
   computed: {
     totalCount() {
@@ -37,9 +37,9 @@ export default {
       set(value) {
         console.log("checkedAll's set", value);
         this.selectAll(value);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

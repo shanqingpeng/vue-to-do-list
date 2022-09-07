@@ -46,7 +46,7 @@ export default {
     },
     selectAll(checked) {
       console.log("this is App's selectAll", checked);
-      this.todoList.forEach(e => e.done = checked);
+      this.todoList.forEach((e) => (e.done = checked));
     },
     selectOne(id) {
       this.todoList.forEach((e) => {
